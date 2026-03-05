@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const WORDS = ["B.CS next", "React & Next.js", "Arch Linux", "security-minded", "always shipping"];
 const STATS = [
   { num: "4+", label: "Projects Built" },
-  { num: "2+", label: "Years Coding" },
-  { num: "3",  label: "Frameworks" },
+  { num: "3+", label: "Years Coding" },
+  { num: "6+",  label: "Frameworks" },
 ];
 
 type Status = { label: string; color: string; glow: string; };
