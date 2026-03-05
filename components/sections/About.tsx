@@ -36,8 +36,8 @@ export default function About() {
 
   const fadeUp = (delay: number) => ({
     initial: { opacity: 0, y: 24 },
-    animate: inView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 0.7, delay, ease: "easeOut" },
+    animate: inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
+    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
   });
 
   const card = (extra?: React.CSSProperties): React.CSSProperties => ({
