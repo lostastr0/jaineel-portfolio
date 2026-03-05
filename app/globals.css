@@ -21,6 +21,7 @@ body {
   background: #060608;
   color: #efefef;
   overflow-x: hidden;
+  font-family: var(--font-syne), sans-serif; /* ADD THIS */
 }
 
 ::-webkit-scrollbar { width: 3px; }
