@@ -48,12 +48,19 @@ const ResumeIcon = () => (
 
 function ResumeModal({ onClose }: { onClose: () => void }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       onClick={onClose}
-      style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(2,2,4,0.85)", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)", padding: "20px" }}>
-      <motion.div initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 20 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(2,2,4,0.85)", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(4px)" }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.92, y: 20 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         onClick={e => e.stopPropagation()}
-        style={{ background: "#0e0e12", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, padding: "48px 40px", maxWidth: 400, width: "100%", textAlign: "center", position: "relative" }}>
+        style={{ background: "#0e0e12", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, padding: "48px 40px", maxWidth: 400, width: "90%", textAlign: "center", position: "relative" }}
+      >
         <button onClick={onClose} style={{ position: "absolute", top: 16, right: 16, background: "none", border: "none", cursor: "pointer", color: "#6b7280", fontSize: 18, lineHeight: 1 }}>✕</button>
         <div style={{ width: 48, height: 48, borderRadius: "50%", background: "rgba(250,204,21,0.08)", border: "1px solid rgba(250,204,21,0.2)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
           <span style={{ fontSize: 20 }}>🚧</span>
@@ -79,7 +86,9 @@ export default function Contact() {
   const [time, setTime] = useState("");
 
   useEffect(() => {
-    const update = () => setTime(new Date().toLocaleTimeString("en-AU", { timeZone: "Australia/Brisbane", hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+    const update = () => setTime(new Date().toLocaleTimeString("en-AU", {
+      timeZone: "Australia/Brisbane", hour: "2-digit", minute: "2-digit", second: "2-digit"
+    }));
     update();
     const iv = setInterval(update, 1000);
     return () => clearInterval(iv);
@@ -99,31 +108,25 @@ export default function Contact() {
   const fadeUp = (delay: number) => ({
     initial: { opacity: 0, y: 24 },
     animate: inView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as number[] },
+    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   });
 
   return (
     <>
-      <style>{`
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-        .contact-meta { display: flex; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
-        .contact-meta-item { display: flex; flex-direction: column; gap: 6px; padding: 0 32px; border-right: 1px solid rgba(255,255,255,0.06); }
-        .contact-meta-item:first-child { padding-left: 0; }
-        .contact-meta-item:last-child { border-right: none; }
-        @media (max-width: 640px) {
-          .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .contact-meta { flex-direction: column !important; gap: 16px !important; margin-top: 36px !important; }
-          .contact-meta-item { padding: 0 !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px !important; }
-          .contact-meta-item:last-child { border-bottom: none !important; }
-        }
-      `}</style>
-
-      <section id="contact" ref={ref} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", overflow: "hidden", background: "radial-gradient(ellipse 60% 55% at 50% 40%, rgba(14,14,18,1) 0%, rgba(6,6,8,1) 60%, #020204 100%)" }}>
+      <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }`}</style>
+      <section
+        id="contact"
+        ref={ref}
+        style={{
+          minHeight: "100vh", display: "flex", flexDirection: "column",
+          justifyContent: "center", position: "relative", overflow: "hidden",
+          background: "radial-gradient(ellipse 60% 55% at 50% 40%, rgba(14,14,18,1) 0%, rgba(6,6,8,1) 60%, #020204 100%)",
+        }}
+      >
         <div style={{ position: "absolute", width: 800, height: 500, background: "radial-gradient(ellipse at 50% 50%, rgba(224,242,254,0.05) 0%, transparent 70%)", top: "50%", left: "50%", transform: "translate(-50%,-50%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(2,2,4,0.7) 100%)" }} />
 
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px clamp(20px, 5vw, 48px)", position: "relative", zIndex: 1, width: "100%" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 48px", position: "relative", zIndex: 1, width: "100%" }}>
 
           {/* Header */}
           <motion.div {...fadeUp(0)} style={{ marginBottom: 40, paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
@@ -131,7 +134,7 @@ export default function Contact() {
               <span style={{ width: 24, height: 1, background: "rgba(224,242,254,0.2)", display: "inline-block" }} />
               04 / 04
             </div>
-            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
               <h2 style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(32px,4vw,56px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, margin: 0 }}>
                 Get in <span style={{ color: "#e0f2fe" }}>touch</span>
               </h2>
@@ -144,60 +147,96 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Two columns */}
-          <div className="contact-grid">
+          {/* Main layout — two columns */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
+
+            {/* Left — big statement */}
             <div>
-              <motion.p {...fadeUp(0.1)} style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(24px, 3.5vw, 52px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.05, color: "#efefef", margin: "0 0 24px" }}>
+              <motion.p {...fadeUp(0.1)} style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(28px, 3.5vw, 52px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.05, color: "#efefef", margin: "0 0 24px" }}>
                 Early in my career.{" "}
                 <span style={{ color: "rgba(200,200,216,0.4)" }}>Big on potential.</span>
                 <br />
                 Ready to{" "}
                 <AnimatePresence mode="wait">
-                  <motion.span key={wordIndex} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  <motion.span
+                    key={wordIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     onClick={() => setWordIndex(i => (i + 1) % WORDS.length)}
-                    style={{ color: "#e0f2fe", cursor: "pointer", display: "inline-block" }}>
+                    style={{ color: "#e0f2fe", cursor: "pointer", display: "inline-block" }}
+                  >
                     {WORDS[wordIndex]}
                   </motion.span>
                 </AnimatePresence>
               </motion.p>
+
               <motion.p {...fadeUp(0.2)} style={{ fontSize: 13, lineHeight: 1.9, color: "rgba(200,200,216,0.6)", margin: "0 0 32px", maxWidth: 420 }}>
                 Cyber Security student and self-taught developer based in Brisbane. Looking for internships and junior roles where I can contribute, learn fast, and build real things.
               </motion.p>
+
+              {/* Availability */}
               <motion.div {...fadeUp(0.25)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", border: "1px solid rgba(74,222,128,0.2)", borderRadius: 6, background: "rgba(74,222,128,0.04)", width: "fit-content" }}>
                 <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80", display: "inline-block", animation: "pulse 2s infinite", flexShrink: 0 }} />
                 <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 9, letterSpacing: "0.15em", textTransform: "uppercase", color: "#4ade80" }}>Available for internships &amp; work</span>
               </motion.div>
             </div>
 
+            {/* Right — contact actions */}
             <motion.div {...fadeUp(0.15)} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+
+              {/* Email — primary */}
               <a href={`mailto:${EMAIL}`} style={{ textDecoration: "none" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 22px", background: "#e0f2fe", borderRadius: 6, cursor: "pointer" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
-                    <span style={{ color: "#060608", display: "flex", flexShrink: 0 }}><EmailIcon /></span>
-                    <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: "clamp(9px, 1.8vw, 11px)", letterSpacing: "0.06em", color: "#060608", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{EMAIL}</span>
+                <div style={{
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                  padding: "18px 22px",
+                  background: "#e0f2fe", borderRadius: 6, cursor: "pointer",
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <span style={{ color: "#060608", display: "flex" }}><EmailIcon /></span>
+                    <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 11, letterSpacing: "0.06em", color: "#060608", fontWeight: 600 }}>{EMAIL}</span>
                   </div>
-                  <span style={{ color: "#060608", fontSize: 16, flexShrink: 0, marginLeft: 8 }}>↗</span>
+                  <span style={{ color: "#060608", fontSize: 16 }}>↗</span>
                 </div>
               </a>
+
+              {/* Secondary actions */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {[
                   { icon: <GithubIcon />, label: "GitHub", href: "https://github.com/jaineelkhatri" },
                   { icon: <LinkedInIcon />, label: "LinkedIn", href: "https://linkedin.com/in/jaineelkhatri" },
                 ].map(btn => (
                   <a key={btn.label} href={btn.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 18px", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, background: "rgba(255,255,255,0.02)", cursor: "pointer", transition: "all 0.2s" }}>
+                    <div style={{
+                      display: "flex", alignItems: "center", gap: 10, padding: "14px 18px",
+                      border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6,
+                      background: "rgba(255,255,255,0.02)", cursor: "pointer", transition: "all 0.2s",
+                    }}>
                       <span style={{ color: "#c8c8d8", display: "flex" }}>{btn.icon}</span>
                       <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 10, letterSpacing: "0.1em", color: "#c8c8d8" }}>{btn.label}</span>
                     </div>
                   </a>
                 ))}
               </div>
+
+              {/* Copy email + Resume */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                <button onClick={copyEmail} style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 18px", border: `1px solid ${copied ? "rgba(74,222,128,0.3)" : "rgba(255,255,255,0.08)"}`, borderRadius: 6, background: copied ? "rgba(74,222,128,0.05)" : "rgba(255,255,255,0.02)", cursor: "pointer", transition: "all 0.2s" }}>
+                <button onClick={copyEmail} style={{
+                  display: "flex", alignItems: "center", gap: 10, padding: "14px 18px",
+                  border: `1px solid ${copied ? "rgba(74,222,128,0.3)" : "rgba(255,255,255,0.08)"}`,
+                  borderRadius: 6, background: copied ? "rgba(74,222,128,0.05)" : "rgba(255,255,255,0.02)",
+                  cursor: "pointer", transition: "all 0.2s",
+                }}>
                   <span style={{ color: copied ? "#4ade80" : "#c8c8d8", display: "flex" }}>{copied ? <CheckIcon /> : <CopyIcon />}</span>
                   <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 10, letterSpacing: "0.1em", color: copied ? "#4ade80" : "#c8c8d8" }}>{copied ? "Copied!" : "Copy email"}</span>
                 </button>
-                <button onClick={() => setResumeOpen(true)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 18px", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, background: "rgba(255,255,255,0.02)", cursor: "pointer", transition: "all 0.2s" }}>
+
+                <button onClick={() => setResumeOpen(true)} style={{
+                  display: "flex", alignItems: "center", gap: 10, padding: "14px 18px",
+                  border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6,
+                  background: "rgba(255,255,255,0.02)", cursor: "pointer", transition: "all 0.2s",
+                }}>
                   <span style={{ color: "#c8c8d8", display: "flex" }}><ResumeIcon /></span>
                   <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 10, letterSpacing: "0.1em", color: "#c8c8d8" }}>Resume / CV</span>
                 </button>
@@ -206,19 +245,20 @@ export default function Contact() {
           </div>
 
           {/* Meta strip */}
-          <motion.div {...fadeUp(0.35)} className="contact-meta">
+          <motion.div {...fadeUp(0.35)} style={{ display: "flex", marginTop: 56, paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
             {[
               { k: "Based in", v: "Brisbane, QLD, AU" },
               { k: "Study",    v: "Cert IV Cyber Security" },
               { k: "Next",     v: "B.CS · QUT · 2027" },
               { k: "Email",    v: EMAIL },
-            ].map(({ k, v }) => (
-              <div key={k} className="contact-meta-item">
+            ].map(({ k, v }, i) => (
+              <div key={k} style={{ display: "flex", flexDirection: "column", gap: 6, padding: "0 32px", borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none", paddingLeft: i === 0 ? 0 : 32 }}>
                 <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 8, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(200,200,216,0.35)" }}>{k}</span>
                 <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 11, color: "#efefef" }}>{v}</span>
               </div>
             ))}
           </motion.div>
+
         </div>
       </section>
 
